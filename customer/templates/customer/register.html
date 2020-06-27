@@ -1,0 +1,29 @@
+{% extends "room/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}  
+<article class="media content-section box-shadow col-md-6" style="border-radius: 15px; margin: auto; margin-bottom: 15px;">
+    <div class="media-body">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend style="border-bottom: 1px solid rgba(0, 0, 0, 0.20);">
+                    REGISTER
+                </legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-primary" style="border-width: 2px; font-weight: bold;" type="submit">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+        <div style="border-top: 1px solid rgba(0, 0, 0, 0.20);">
+            <small class="text-muted">
+                Existing Customer? <a class="ml-2" href="{% url 'login' %}">Login</a>
+            </small>
+        </div>
+    </div>
+    </div>
+    </article>
+{% endblock content %}    

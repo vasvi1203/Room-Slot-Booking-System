@@ -1,0 +1,98 @@
+{% extends "room/base.html" %}
+{% block content %}   
+<div class="col-md-12">
+    <h2>BOOK A ROOM</h2>
+</div>
+<div class="col-md-3" style="float: right;">
+    <article class="media content-section box-shadow" style="border-radius: 15px; ">
+        <div class="media-body">
+            <div class="article-metadata">
+                <h2 class="article-title font-weight-light" style="border-bottom: 1px solid rgba(0, 0, 0, 0.20);">Dates</h2>
+        <ul class="list-group text-center">
+          {% for date in dates %}  
+                <form method="POST" action="{% url 'room-book' date|date:'d' %}">
+                    {% csrf_token %}             
+                    {% if date == on_date %}
+                        <button class="btn btn-primary" style="border: none; font-weight: bold;" type="submit" name = "date_id" id = "date_id" value = "{{ date|date:'F d, Y' }}">     
+                    {% else %}
+                        <button class="btn btn-outline-primary" style="border: none; font-weight: bold;" type="submit" name = "date_id" id = "date_id" value = "{{ date|date:'F d, Y' }}">
+                    {% endif %}
+                            <li style="background-color: transparent; border: none; list-style-type: none;"> {{ date|date:'F d, Y' }}   </li>
+                        </button>           
+                </form>       
+          {% endfor %}
+        </ul>
+            </div>
+        </div>
+    </article>
+</div>
+    {% for room in rooms %}  
+    <div class="col-md-9" style="float: left;">
+    <article class="media content-section box-shadow" style="border-radius: 15px;">
+        <div class="media-body">
+        <div class="article-metadata">
+            <h2 class="article-title font-weight-light" style="border-bottom: 1px solid rgba(0, 0, 0, 0.20);">{{ room.room_number }}</h2>           
+            <!--<h2><a class="article-title" href="#">{{ post.title }}</a></h2>-->
+            {% for slot in room.slot_set.all %}
+                {% if slot.date == on_date %}
+                    {% if slot.status == 'booked' %}
+                        <button class="btn btn-secondary" style="border-width: 2px; font-weight: bold; margin: 3px;" disabled>{{ slot.time_start|time:'h:i A' }} - {{ slot.time_end|time:'h:i A' }}</button>
+                    {% else %}
+                    <div style="float: left;">
+                    <form method="POST" action="{% url 'room-booked' room.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-primary" style="border-width: 2px; font-weight: bold; margin: 3px;" type="submit" name = "room_id" id = "room_id" value = "{{ room.room_number }} | {{ slot.time_start|date:'h:i A' }} - {{ slot.time_end|date:'h:i A' }} | {{ slot.date}}">
+                            {{ slot.time_start|time:'h:i A' }} - {{ slot.time_end|time:'h:i A' }}
+                        </button>
+                    </form>
+                    </div>
+                    {% endif %}                    
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </article>
+    </div>
+    {% empty %}
+        <h2 class="article-title font-weight-light" data-toggle="tooltip" data-placement="bottom">No rooms available!</h2>
+    {% endfor %}
+    
+    {% if rooms.paginator.page_range|length > 1 %}
+    <div class="col-md-9">
+      {% if rooms.has_previous %}
+        <a class="btn btn-outline-primary mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-primary mb-4" href="?page={{ rooms.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in rooms.paginator.page_range %}
+        {% if rooms.number == num %}
+          <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > rooms.number|add:'-3' and num < rooms.number|add:'3' %}
+          <a class="btn btn-outline-primary mb-4" href="?page={{ num }}">{{ num }}</a>     
+        {% endif %}
+      {% endfor %}
+
+      {% if rooms.has_next %}
+        <a class="btn btn-outline-primary mb-4" href="?page={{ rooms.next_page_number }}">Next</a>
+        <a class="btn btn-outline-primary mb-4" href="?page={{ rooms.paginator.num_pages }}">Last</a>
+      {% endif %}
+    </div>
+    {% endif %}
+    
+    <!--<ul class="pagination">
+        {% if rooms.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ rooms.previous_page_number }}">&laquo</a></li>
+        {% endif %}
+        {% for i in rooms.paginator.page_range %}
+        {% if rooms.number == i %}
+            <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if rooms.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ rooms.next_page_number }}">&raquo</a></li>
+        {% endif %}
+    </ul>-->
+
+{% endblock content %}    

@@ -1,0 +1,111 @@
+body {
+    color: #333333;
+    margin-top: 5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6, legend {
+    color: #444444;
+    font-weight:bold;
+  }
+
+  ul {
+    margin: 0;
+  }
+  
+  .bg-steel {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,144,202,1) 41%, rgba(0,123,255,1) 100%);
+    
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #000000;
+  }
+
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: bold;
+  }
+  
+  .content-section {
+    padding: 16px 16px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    background-image: url("matrix.jpg");
+  }
+
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+
+  .article-img {
+    height: 32px;
+    width: 32px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 150px;
+    width: 150px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-left: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  table, th, td {
+    border:3px ridge black;
+    border-collapse:collapse;
+    }
+  th {
+    text-align:center;
+    font-family:harrington;
+    color:black;
+    font-weight:bold;
+    font-size:30px
+    }
+  td {
+    text-align:center;
+    font-family:comic sans MS;
+    color:black;
+    }
+
+  .box-shadow {
+      box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.08);
+      transition: box-shadow 0.1s ease-in-out;
+  }
+  .box-shadow:hover {
+      box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.20);
+  }

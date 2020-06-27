@@ -1,0 +1,33 @@
+{% extends "room/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}    
+<article class="media content-section box-shadow col-md-6" style="border-radius: 15px; margin: auto;">
+    <div class="media-body">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend style="border-bottom: 1px solid rgba(0, 0, 0, 0.20);">
+                    LOGIN
+                </legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-primary" style="border-width: 2px; font-weight: bold;" type="submit">
+                 Login
+                </button>
+                <small class = "text-muted ml-2">
+                    <a href = "{% url 'password_reset' %}">
+                        Forgot Password?
+                    </a>
+                </small>
+            </div>
+        
+        <div style="border-top: 1px solid rgba(0, 0, 0, 0.20);">
+            <small class="text-muted">
+                Need an account? <a class="ml-2" href="{% url 'room-register' %}">Register</a>
+            </small>
+        </div>
+    </form>
+    </div>
+    </article>
+{% endblock content %}    

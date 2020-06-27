@@ -1,0 +1,14 @@
+{% extends "room/base.html" %}
+{% block content %}   
+    <article class="media content-section">
+        <div class="media-body">
+            <h2>{{ number }} has been booked for the time slot {{ slot }} by {{creator}}!</h2>
+            <h2>You can go to "My Bookings" to view rooms booked by you.</h2>
+            <a href="{% url 'room-book' %}">
+                <button class="btn btn-outline-primary" style="border-width: 2px; font-weight: bold;" type="submit">
+                    Continue booking
+                </button>
+            </a>
+        </div>
+    </article>
+{% endblock content %}    

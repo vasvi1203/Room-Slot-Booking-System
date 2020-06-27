@@ -1,0 +1,18 @@
+{% extends "room/base.html" %}
+{% block content %}
+    <article class="media content-section box-shadow" style="border-radius: 15px;">
+        <div class="media-body">
+            <div class="article-metadata">
+            <h1>WELCOME TO ROOM SLOT BOOKING SYSTEM!</h1><br>
+                <a href="{% url 'room-book' date|date:'d' %}">
+                    <button class="btn btn-outline-primary" style="border-width: 2px; font-weight: bold;" type="submit">
+                        Start Booking
+                    </button>
+                </a>
+                <br>
+            </div>
+            <!--<h2><a class="article-title" href="#">{{ post.title }}</a></h2>-->
+        </div>
+    </article>
+    
+{% endblock content %}
