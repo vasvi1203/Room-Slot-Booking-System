@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'room-home'
@@ -141,8 +141,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'vasvipsf@gmail.com'
-EMAIL_HOST_PASSWORD = 'psfweb1234'
+EMAIL_HOST_USER = 'vasvimisc@gmail.com'
+EMAIL_HOST_PASSWORD = 'miscellaneous'
 
 '''CRONJOBS = [
     ('0 0 * * *', 'room.management.commands.purge_old_data.Command.handle.deldate'),
