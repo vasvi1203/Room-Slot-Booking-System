@@ -10,6 +10,7 @@ django = "*"
 django-crispy-forms = "*"
 django-crontab = "*"
 pillow = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
