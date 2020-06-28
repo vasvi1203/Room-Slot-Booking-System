@@ -54,7 +54,9 @@
     </article>
     </div>
     {% empty %}
-        <h2 class="article-title font-weight-light" data-toggle="tooltip" data-placement="bottom">No rooms available!</h2>
+        <div class="col-md-12">
+            <h2 class="article-title font-weight-light">No rooms available!</h2>
+        </div>
     {% endfor %}
     
     {% if rooms.paginator.page_range|length > 1 %}
