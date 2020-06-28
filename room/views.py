@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, date
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DeleteView, DetailView
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -76,13 +76,12 @@ def booked(request, room_id):
         b.save()
         room_booked = Slot.objects.filter(room = room_id, date = date, time_start = start, time_end = end, status = "available")
         room_booked.update(status = 'booked')
-        send_mail(
-            'Booking confirmed!',
-            'Your booking:\nDate : ' + str(d) + '\nRoom No. : ' + number + '\nTime Slot : ' + str(s) + ' to ' + str(e),
-            'booking@raceforspace.com',
-            [email],
-            fail_silently=False,
+        msg = EmailMessage(
+            subject='Booking confirmed!',
+            body='Your booking:\nDate : ' + str(d) + '\nRoom No. : ' + number + '\nTime Slot : ' + str(s) + ' to ' + str(e),
+            to=[email],
         )
+        msg.send()
     context = {
         'number':number,
         'slot':slot,        
@@ -126,10 +125,9 @@ def delete(request, room_id):
             room_booked = Slot.objects.filter(room = i.id, date = date, time_start = start, time_end = end, status = "booked")
             room_booked.update(status = 'available')
             send_mail(
-                'Booking deleted☹!',
-                'Your booking for ' + number + ' on ' + str(d) + ' for the time slot ' + str(s) + ' to ' + str(e) + ' has been deleted.',
-                'booking@raceforspace.com',
-                [email],
+                subject='Booking deleted☹!',
+                message='Your booking for ' + number + ' on ' + str(d) + ' for the time slot ' + str(s) + ' to ' + str(e) + ' has been deleted.',
+                recipient_list=[email],
                 fail_silently=False,
             )
 
