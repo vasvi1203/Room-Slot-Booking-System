@@ -124,12 +124,12 @@ def delete(request, room_id):
             b.delete()
             room_booked = Slot.objects.filter(room = i.id, date = date, time_start = start, time_end = end, status = "booked")
             room_booked.update(status = 'available')
-            send_mail(
+            msg = EmailMessage(
                 subject='Booking deleted☹!',
-                message='Your booking for ' + number + ' on ' + str(d) + ' for the time slot ' + str(s) + ' to ' + str(e) + ' has been deleted.',
-                recipient_list=[email],
-                fail_silently=False,
+                body='Your booking for ' + number + ' on ' + str(d) + ' for the time slot ' + str(s) + ' to ' + str(e) + ' has been deleted.',
+                to=[email],
             )
+            msg.send()
 
     except:
         print('Booking does not exist!') 
