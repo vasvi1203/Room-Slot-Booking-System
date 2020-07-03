@@ -157,7 +157,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
 
-AWS_DEFAULT_REGION = 'ap-south-1'
+AWS_S3_REGION_NAME = 'ap-south-1'
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
