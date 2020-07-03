@@ -159,7 +159,7 @@ django_heroku.settings(locals())
 
 AWS_DEFAULT_REGION = 'ap-south-1'
 
-'''AWS_S3_SIGNATURE_VERSION = 's3v4'''
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 '''CRONJOBS = [
     ('0 0 * * *', 'room.management.commands.purge_old_data.Command.handle.deldate'),
