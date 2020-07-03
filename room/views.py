@@ -69,7 +69,7 @@ def booked(request, room_id):
         end = datetime.strptime(e, '%I:%M %p')
         d = slots[2].strip()
         date = datetime.strptime(d, "%B %d, %Y").date()
-        creator = request.user
+        creator = str(request.user)
         u = User.objects.get(username__iexact=creator)
         email = u.email
         b = Booking(customer = creator, date = date, time_start = start, time_end = end, room_number = number)
@@ -116,7 +116,7 @@ def delete(request, room_id):
             end = datetime.strptime(e, '%I:%M %p')
             d = slots[2].strip()
             date = datetime.strptime(d, "%B %d, %Y").date()
-            creator = request.user
+            creator = str(request.user)
             u = User.objects.get(username__iexact=creator)
             email = u.email
             i = Room.objects.get(room_number = number)
