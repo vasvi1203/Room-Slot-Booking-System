@@ -72,16 +72,16 @@ def booked(request, room_id):
         creator = request.user
         u = User.objects.get(username__iexact = str(creator))
         email = u.email
-        b = Booking(customer = creator, date = date, time_start = start, time_end = end, room_number = number)
-        b.save()
-        room_booked = Slot.objects.filter(room = room_id, date = date, time_start = start, time_end = end, status = "available")
-        room_booked.update(status = 'booked')
         msg = EmailMessage(
             subject='Booking confirmed!',
             body='Your booking:\nDate : ' + str(d) + '\nRoom No. : ' + number + '\nTime Slot : ' + str(s) + ' to ' + str(e),
             to=[email],
         )
         msg.send()
+        b = Booking(customer = creator, date = date, time_start = start, time_end = end, room_number = number)
+        b.save()
+        room_booked = Slot.objects.filter(room = room_id, date = date, time_start = start, time_end = end, status = "available")
+        room_booked.update(status = 'booked')
     context = {
         'number':number,
         'slot':slot,        
@@ -119,17 +119,17 @@ def delete(request, room_id):
             creator = request.user
             u = User.objects.get(username__iexact = str(creator))
             email = u.email
-            i = Room.objects.get(room_number = number)
-            b = Booking.objects.get(customer = creator, date = date, time_start = start, time_end = end, room_number = number)
-            b.delete()
-            room_booked = Slot.objects.filter(room = i.id, date = date, time_start = start, time_end = end, status = "booked")
-            room_booked.update(status = 'available')
             msg = EmailMessage(
                 subject='Booking deleted☹!',
                 body='Your booking for ' + number + ' on ' + str(d) + ' for the time slot ' + str(s) + ' to ' + str(e) + ' has been deleted.',
                 to=[email],
             )
             msg.send()
+            i = Room.objects.get(room_number = number)
+            b = Booking.objects.get(customer = creator, date = date, time_start = start, time_end = end, room_number = number)
+            b.delete()
+            room_booked = Slot.objects.filter(room = i.id, date = date, time_start = start, time_end = end, status = "booked")
+            room_booked.update(status = 'available')
 
     except:
         print('Booking does not exist!') 
